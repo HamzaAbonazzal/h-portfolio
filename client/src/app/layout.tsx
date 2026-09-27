@@ -1,6 +1,7 @@
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import type { Metadata } from "next";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: {
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html suppressHydrationWarning>
       <head>
+        {/* Script منع وميض الثيم + ضبط اللغة */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -48,6 +50,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               })();
             `,
           }}
+        />
+
+        {/* ✅ Cloudinary Upload Widget Script */}
+        <Script
+          src="https://upload-widget.cloudinary.com/global/all.js"
+          strategy="lazyOnload"
         />
       </head>
       <body>

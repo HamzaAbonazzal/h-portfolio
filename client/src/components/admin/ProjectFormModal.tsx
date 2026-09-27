@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Loader2, Save } from "lucide-react";
+import { X, Loader2, Save, Upload, ImageIcon, Link as LinkIcon } from "lucide-react";
 import { adminProjectService, type Project } from "@/lib/api";
 
 interface ProjectFormModalProps {
@@ -28,6 +28,18 @@ const emptyForm = {
   featured: false,
 };
 
+// ✅ نوع widget الخاص بـ Cloudinary
+declare global {
+  interface Window {
+    cloudinary?: {
+      createUploadWidget: (
+        options: Record<string, unknown>,
+        callback: (error: unknown, result: { event: string; info: { secure_url: string } }) => void
+      ) => { open: () => void };
+    };
+  }
+}
+
 export function ProjectFormModal({
   open,
   onClose,
@@ -37,6 +49,7 @@ export function ProjectFormModal({
   const t = useTranslations("admin.dashboard.form");
   const [form, setForm] = useState(emptyForm);
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   // تحميل بيانات المشروع عند التعديل
   useEffect(() => {
@@ -71,7 +84,9 @@ export function ProjectFormModal({
   }, [open]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
@@ -79,6 +94,67 @@ export function ProjectFormModal({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
+  };
+
+  // ✅ رفع الصورة عبر Cloudinary Widget
+  const handleImageUpload = () => {
+    if (!window.cloudinary) {
+      alert("Cloudinary widget is still loading. Please try again in a moment.");
+      return;
+    }
+
+    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+    const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
+
+    if (!cloudName || !uploadPreset) {
+      alert(
+        "Cloudinary is not configured. Please set NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME and NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET in .env.local"
+      );
+      return;
+    }
+
+    setUploading(true);
+
+    const widget = window.cloudinary.createUploadWidget(
+      {
+        cloudName,
+        uploadPreset,
+        folder: "portfolio/projects",
+        sources: ["local", "url", "camera"],
+        multiple: false,
+        maxFileSize: 5000000, // 5MB
+        cropping: true,
+        croppingAspectRatio: 16 / 9,
+        showSkipCropButton: false,
+        croppingShowDimensions: true,
+        resourceType: "image",
+        clientAllowedFormats: ["jpg", "jpeg", "png", "webp"],
+        language: "en",
+        text: {
+          en: {
+            or: "or",
+            local: {
+              browse: "Browse",
+              dd_title_single: "Drag and drop an image here",
+            },
+          },
+        },
+      },
+      (error, result) => {
+        setUploading(false);
+
+        if (!error && result && result.event === "success") {
+          // ✅ ضع الرابط المُحسّن مباشرة
+          const optimizedUrl = result.info.secure_url.replace(
+            "/upload/",
+            "/upload/w_1200,h_675,c_fill,q_auto,f_auto/"
+          );
+          setForm((prev) => ({ ...prev, image: optimizedUrl }));
+        }
+      }
+    );
+
+    widget.open();
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -110,7 +186,8 @@ export function ProjectFormModal({
 
   if (!open) return null;
 
-  const inputClass = "w-full px-4 py-2.5 rounded-xl bg-white/50 dark:bg-dark-800/50 " +
+  const inputClass =
+    "w-full px-4 py-2.5 rounded-xl bg-white/50 dark:bg-dark-800/50 " +
     "border border-gold-500/20 focus:border-gold-500 focus:outline-none " +
     "text-gray-800 dark:text-gray-100 text-sm placeholder-gray-400 " +
     "transition-all duration-300";
@@ -151,7 +228,10 @@ export function ProjectFormModal({
             </div>
 
             {/* النموذج */}
-            <form onSubmit={handleSubmit} className="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
+            <form
+              onSubmit={handleSubmit}
+              className="p-6 space-y-4 max-h-[70vh] overflow-y-auto"
+            >
               {/* العناوين */}
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
@@ -243,20 +323,83 @@ export function ProjectFormModal({
                 </div>
               </div>
 
-              {/* الصورة */}
-              <div>
-                <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
+              {/* ═══════════════════════════════════════ */}
+              {/* 🖼️ الصورة - مع زر رفع Cloudinary */}
+              {/* ═══════════════════════════════════════ */}
+              <div className="p-4 rounded-2xl border-2 border-dashed border-gold-500/20 bg-gold-500/[0.02]">
+                <label className="block text-xs font-bold text-gold-500 uppercase tracking-wider mb-3">
                   {t("image")}
                 </label>
-                <input
-                  type="url"
-                  name="image"
-                  value={form.image}
-                  onChange={handleChange}
-                  required
-                  placeholder="https://example.com/image.jpg"
-                  className={inputClass}
-                />
+
+                <div className="grid md:grid-cols-[1fr,auto] gap-3 items-start">
+                  {/* حقل الرابط */}
+                  <div className="space-y-2">
+                    <div className="relative">
+                      <LinkIcon className="absolute top-1/2 -translate-y-1/2 start-4 w-4 h-4 text-gold-500/60" />
+                      <input
+                        type="url"
+                        name="image"
+                        value={form.image}
+                        onChange={handleChange}
+                        required
+                        placeholder="https://res.cloudinary.com/..."
+                        className={`${inputClass} ps-11`}
+                      />
+                    </div>
+
+                    {/* زر الرفع */}
+                    <button
+                      type="button"
+                      onClick={handleImageUpload}
+                      disabled={uploading}
+                      className="w-full inline-flex items-center justify-center gap-2
+                                 px-5 py-2.5 rounded-xl
+                                 bg-gold-500/10 text-gold-500 text-sm font-semibold
+                                 border border-gold-500/30
+                                 hover:bg-gold-500/20 hover:border-gold-500
+                                 transition-all duration-300
+                                 disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                      {uploading ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          Uploading...
+                        </>
+                      ) : (
+                        <>
+                          <Upload className="w-4 h-4" />
+                          Upload Image to Cloudinary
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  {/* معاينة الصورة */}
+                  <div className="w-full md:w-48 h-32 md:h-28 rounded-xl border border-gold-500/20
+                                  bg-white/50 dark:bg-dark-700/50 overflow-hidden
+                                  flex items-center justify-center">
+                    {form.image ? (
+                      <img
+                        src={form.image}
+                        alt="Preview"
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = "none";
+                        }}
+                      />
+                    ) : (
+                      <div className="flex flex-col items-center gap-1.5 text-gray-400">
+                        <ImageIcon className="w-6 h-6" />
+                        <span className="text-[10px]">Preview</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <p className="mt-3 text-[11px] text-gray-500 dark:text-gray-500 flex items-center gap-1.5">
+                  <span className="w-1 h-1 rounded-full bg-gold-500/60" />
+                  استخدم زر الرفع أو ألصق رابط صورة مباشر (JPG, PNG, WebP)
+                </p>
               </div>
 
               {/* التقنيات */}
