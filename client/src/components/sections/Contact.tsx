@@ -48,25 +48,25 @@ export function Contact() {
   const socials = [
     {
       icon: FaGithub,
-      href: "https://github.com/yourusername",
+      href: "https://github.com/hamzaabonazzal",
       label: "GitHub",
       color: "hover:text-gray-800 dark:hover:text-white",
     },
     {
       icon: FaLinkedin,
-      href: "https://linkedin.com/in/yourusername",
+      href: "https://linkedin.com/in/hamza-abonazzal",
       label: "LinkedIn",
       color: "hover:text-blue-500",
     },
     {
       icon: FaTwitter,
-      href: "https://twitter.com/yourusername",
+      href: "https://x.com/HamzaAbonazzal",
       label: "Twitter",
       color: "hover:text-sky-500",
     },
     {
       icon: FaWhatsapp,
-      href: "https://wa.me/963900000000",
+      href: "https://wa.me/963986751916",
       label: "WhatsApp",
       color: "hover:text-green-500",
     },

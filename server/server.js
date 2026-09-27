@@ -12,10 +12,22 @@ const authRoutes = require("./routes/authRoutes");
 // Middleware
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
+const cors = require("cors");
+
+const corsOptions = {
+  origin: "https://h-portfolio-000.vercel.app", // رابط الواجهة الأمامية
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
+
 dotenv.config();
 connectDB();
 
 const app = express();
+
+app.use(cors(corsOptions));
+
+app.options("*", cors(corsOptions));
 
 // Middlewares العامة
 app.use(cors());

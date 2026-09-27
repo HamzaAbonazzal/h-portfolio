@@ -31,17 +31,17 @@ export function Hero() {
   const socials = [
     {
       icon: FaGithub,
-      href: "https://github.com/yourusername",
+      href: "https://github.com/hamzaabonazzal",
       label: "GitHub",
     },
     {
       icon: FaLinkedin,
-      href: "https://linkedin.com/in/yourusername",
+      href: "https://linkedin.com/in/hamza-abonazzal",
       label: "LinkedIn",
     },
     {
       icon: FaTwitter,
-      href: "https://twitter.com/yourusername",
+      href: "https://x.com/HamzaAbonazzal",
       label: "Twitter",
     },
   ];
