@@ -1,0 +1,204 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact",
+    "hire_me": "Hire Me"
+  },
+  "hero": {
+    "greeting": "Hello, I'm",
+    "name": "Hamza Abonazzal",
+    "subtitle": "Passionate Full Stack developer building modern web applications. Looking for my first job opportunity to grow in a professional environment.",
+    "cta_contact": "Contact Me",
+    "cta_cv": "Download CV",
+    "scroll_down": "Scroll Down",
+    "available": "Looking for First Job",
+    "based_in": "Based in Aleppo, Syria"
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "Get to know me better",
+    "heading": "A passionate developer seeking the first opportunity",
+    "paragraph_1": "I'm a Full Stack developer with 2 years of experience in personal projects, specialized in React and Next.js for frontend, and Node.js with Express for backend.",
+    "paragraph_2": "I work with MongoDB and MySQL databases, and have a strong foundation in modern web technologies. I'm looking for my first job opportunity to apply my skills and learn from a professional team.",
+    "download_cv": "Download CV",
+    "info": {
+      "name": "Name",
+      "email": "Email",
+      "location": "Location",
+      "experience": "Experience",
+      "name_value": "Hamza Abonazzal",
+      "email_value": "hamzaabonazzal@gmail.com",
+      "location_value": "Aleppo, Syria",
+      "experience_value": "2 Years (Personal Projects)"
+    }
+  },
+  "skills": {
+    "title": "Skills",
+    "subtitle": "What I'm good at",
+    "categories": {
+      "frontend": "Frontend Development",
+      "backend": "Backend Development"
+    },
+    "list": {
+      "react": "React & Next.js",
+      "typescript": "TypeScript",
+      "tailwind": "Tailwind CSS",
+      "bootstrap": "Bootstrap",
+      "framer": "Framer Motion",
+      "redux": "Redux & State Management",
+      "responsive": "Responsive Design",
+      "node": "Node.js & Express",
+      "mongodb": "MongoDB & Mongoose",
+      "mysql": "MySQL",
+      "rest": "REST APIs",
+      "auth": "JWT Authentication",
+      "validation": "Data Validation",
+      "security": "Security Best Practices"
+    }
+  },
+  "technologies": {
+    "title": "Technologies",
+    "subtitle": "My programming technologies and tools",
+    "description": "These are the technologies and tools I work with daily",
+    "tab_technologies": "Technologies",
+    "tab_tools": "Tools"
+  },
+  "stats": {
+    "title": "Achievements",
+    "subtitle": "My journey in numbers",
+    "projects": "Projects Completed",
+    "experience": "Years Experience",
+    "coding_hours": "Coding Hours",
+    "technologies": "Technologies Mastered"
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Some of my recent work",
+    "description": "A selection of projects that showcase my skills and experience",
+    "view_project": "View Details",
+    "view_code": "View Code",
+    "live_demo": "Live Demo",
+    "view_all": "View All Projects",
+    "filter_all": "All",
+    "filter_web": "Web Apps",
+    "filter_fullstack": "Full Stack",
+    "filter_frontend": "Frontend",
+    "no_projects": "No projects found",
+    "loading": "Loading projects...",
+    "error": "Failed to load projects. Please try again later.",
+    "technologies": "Technologies Used",
+    "close": "Close"
+  },
+  "contact": {
+    "title": "Contact Me",
+    "subtitle": "Let's work together",
+    "heading": "Have any project in mind?",
+    "description": "Do you have an inquiry or project? Contact me and let me know how I can help you. Fill out the form below and I'll reply as soon as possible.",
+    "email_label": "Email",
+    "location_label": "Location",
+    "location_value": "Aleppo, Syria",
+    "follow_me": "Follow Me",
+    "form_title": "Send me a message",
+    "name": "Your Name",
+    "name_placeholder": "Enter your name",
+    "email": "Your Email",
+    "email_placeholder": "you@example.com",
+    "subject": "Subject",
+    "subject_placeholder": "What is this about?",
+    "message": "Message",
+    "message_placeholder": "Write your message here...",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent successfully! I'll reply soon.",
+    "error": "Something went wrong. Please try again.",
+    "validation": {
+      "name_required": "Name is required",
+      "email_required": "Email is required",
+      "email_invalid": "Please enter a valid email",
+      "message_required": "Message is required",
+      "message_short": "Message is too short"
+    }
+  },
+  "footer": {
+    "rights": "All Rights Reserved",
+    "made_with": "Made with",
+    "by": "by"
+  },
+  "admin": {
+    "login": {
+      "title": "Admin Login",
+      "subtitle": "Sign in to manage your portfolio",
+      "email": "Email",
+      "email_placeholder": "admin@portfolio.com",
+      "password": "Password",
+      "password_placeholder": "Enter your password",
+      "submit": "Sign In",
+      "submitting": "Signing in...",
+      "error": "Invalid email or password",
+      "back_to_site": "Back to Site"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "welcome": "Welcome back",
+      "logout": "Logout",
+      "view_site": "View Site",
+      "stats": {
+        "total_projects": "Total Projects",
+        "featured_projects": "Featured",
+        "unread_messages": "Unread Messages",
+        "total_messages": "Total Messages"
+      },
+      "tabs": {
+        "projects": "Projects",
+        "messages": "Messages"
+      },
+      "projects": {
+        "title": "Manage Projects",
+        "add_new": "Add New Project",
+        "edit": "Edit",
+        "delete": "Delete",
+        "featured": "Featured",
+        "no_projects": "No projects yet. Add your first one!",
+        "confirm_delete": "Are you sure you want to delete this project?"
+      },
+      "messages": {
+        "title": "Inbox",
+        "no_messages": "No messages yet",
+        "read": "Read",
+        "unread": "Unread",
+        "mark_read": "Mark as Read",
+        "delete": "Delete",
+        "confirm_delete": "Are you sure you want to delete this message?",
+        "sent_by": "Sent by"
+      },
+      "form": {
+        "add_title": "Add New Project",
+        "edit_title": "Edit Project",
+        "title_en": "Title (English)",
+        "title_ar": "Title (Arabic)",
+        "description_en": "Description (English)",
+        "description_ar": "Description (Arabic)",
+        "long_description_en": "Long Description (English)",
+        "long_description_ar": "Long Description (Arabic)",
+        "image": "Image URL",
+        "tech_stack": "Technologies (comma separated)",
+        "category": "Category",
+        "github_url": "GitHub URL",
+        "live_url": "Live Demo URL",
+        "featured": "Featured Project",
+        "save": "Save",
+        "saving": "Saving...",
+        "cancel": "Cancel",
+        "categories": {
+          "frontend": "Frontend",
+          "backend": "Backend",
+          "fullstack": "Full Stack",
+          "web": "Web App"
+        }
+      }
+    }
+  }
+}

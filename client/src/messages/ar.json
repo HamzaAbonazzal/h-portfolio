@@ -1,0 +1,204 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "about": "نبذة عني",
+    "skills": "المهارات",
+    "projects": "المشاريع",
+    "contact": "تواصل معي",
+    "hire_me": "وظفني"
+  },
+  "hero": {
+    "greeting": "مرحباً، أنا",
+    "name": "حمزة أبونزال",
+    "subtitle": "مطور فل ستاك شغوف ببناء تطبيقات ويب حديثة. أبحث عن أول فرصة عمل لأطوّر مهاراتي في بيئة احترافية.",
+    "cta_contact": "تواصل معي",
+    "cta_cv": "تحميل السيرة الذاتية",
+    "scroll_down": "اسحب للأسفل",
+    "available": "أبحث عن أول فرصة",
+    "based_in": "مقيم في سوريا - حلب"
+  },
+  "about": {
+    "title": "نبذة عني",
+    "subtitle": "تعرف علي أكثر",
+    "heading": "مطور شغوف يبحث عن أول فرصة احترافية",
+    "paragraph_1": "أنا مطور فل ستاك بخبرة سنتين في تطوير المشاريع الشخصية، متخصص في React و Next.js للواجهة الأمامية، و Node.js مع Express للواجهة الخلفية.",
+    "paragraph_2": "أعمل مع قواعد بيانات MongoDB و MySQL، وأمتلك أساساً قوياً في تقنيات الويب الحديثة. أبحث عن أول فرصة عمل لأطبق مهاراتي وأتعلم من فريق احترافي.",
+    "download_cv": "تحميل السيرة الذاتية",
+    "info": {
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "location": "الموقع",
+      "experience": "الخبرة",
+      "name_value": "حمزة أبونزال",
+      "email_value": "hamzaabonazzal@gmail.com",
+      "location_value": "سوريا - حلب",
+      "experience_value": "سنتان (مشاريع شخصية)"
+    }
+  },
+  "skills": {
+    "title": "المهارات",
+    "subtitle": "ما أتميز به",
+    "categories": {
+      "frontend": "تطوير الواجهة الأمامية",
+      "backend": "تطوير الواجهة الخلفية"
+    },
+    "list": {
+      "react": "React و Next.js",
+      "typescript": "TypeScript",
+      "tailwind": "Tailwind CSS",
+      "bootstrap": "Bootstrap",
+      "framer": "Framer Motion",
+      "redux": "Redux وإدارة الحالة",
+      "responsive": "التصميم المتجاوب",
+      "node": "Node.js و Express",
+      "mongodb": "MongoDB و Mongoose",
+      "mysql": "MySQL",
+      "rest": "REST APIs",
+      "auth": "JWT للمصادقة",
+      "validation": "التحقق من البيانات",
+      "security": "أفضل ممارسات الأمان"
+    }
+  },
+  "technologies": {
+    "title": "التقنيات",
+    "subtitle": "تقنياتي وأدواتي البرمجية",
+    "description": "هذه هي التقنيات والأدوات التي أعمل بها يومياً",
+    "tab_technologies": "التقنيات",
+    "tab_tools": "الأدوات"
+  },
+  "stats": {
+    "title": "الإنجازات",
+    "subtitle": "رحلتي بالأرقام",
+    "projects": "مشروع مكتمل",
+    "experience": "سنوات خبرة",
+    "coding_hours": "ساعة برمجية",
+    "technologies": "تقنية متقنة"
+  },
+  "projects": {
+    "title": "المشاريع",
+    "subtitle": "بعض من أعمالي الأخيرة",
+    "description": "مجموعة مختارة من المشاريع التي تعكس مهاراتي وخبراتي",
+    "view_project": "عرض التفاصيل",
+    "view_code": "عرض الكود",
+    "live_demo": "المعاينة المباشرة",
+    "view_all": "عرض كل المشاريع",
+    "filter_all": "الكل",
+    "filter_web": "تطبيقات ويب",
+    "filter_fullstack": "فل ستاك",
+    "filter_frontend": "الواجهة الأمامية",
+    "no_projects": "لا توجد مشاريع",
+    "loading": "جاري تحميل المشاريع...",
+    "error": "فشل تحميل المشاريع. الرجاء المحاولة لاحقاً.",
+    "technologies": "التقنيات المستخدمة",
+    "close": "إغلاق"
+  },
+  "contact": {
+    "title": "تواصل معي",
+    "subtitle": "لنعمل معاً",
+    "heading": "لديك مشروع في ذهنك؟",
+    "description": "هل لديك استفسار أو مشروع؟ تواصل معي ودعني أعرف كيف يمكنني مساعدتك. املأ النموذج أدناه وسأرد عليك في أقرب وقت ممكن.",
+    "email_label": "البريد الإلكتروني",
+    "location_label": "الموقع",
+    "location_value": "سوريا - حلب",
+    "follow_me": "تابعني",
+    "form_title": "أرسل لي رسالة",
+    "name": "اسمك",
+    "name_placeholder": "اكتب اسمك",
+    "email": "بريدك الإلكتروني",
+    "email_placeholder": "you@example.com",
+    "subject": "الموضوع",
+    "subject_placeholder": "ما هو موضوع رسالتك؟",
+    "message": "الرسالة",
+    "message_placeholder": "اكتب رسالتك هنا...",
+    "send": "إرسال الرسالة",
+    "sending": "جاري الإرسال...",
+    "success": "تم إرسال الرسالة بنجاح! سأرد عليك قريباً.",
+    "error": "حدث خطأ ما. حاول مرة أخرى.",
+    "validation": {
+      "name_required": "الاسم مطلوب",
+      "email_required": "البريد الإلكتروني مطلوب",
+      "email_invalid": "الرجاء إدخال بريد إلكتروني صحيح",
+      "message_required": "الرسالة مطلوبة",
+      "message_short": "الرسالة قصيرة جداً"
+    }
+  },
+  "footer": {
+    "rights": "جميع الحقوق محفوظة",
+    "made_with": "صُنع بـ",
+    "by": "بواسطة"
+  },
+  "admin": {
+    "login": {
+      "title": "لوحة تحكم المشرف",
+      "subtitle": "سجل الدخول لإدارة البورتفوليو",
+      "email": "البريد الإلكتروني",
+      "email_placeholder": "admin@portfolio.com",
+      "password": "كلمة المرور",
+      "password_placeholder": "أدخل كلمة المرور",
+      "submit": "تسجيل الدخول",
+      "submitting": "جاري تسجيل الدخول...",
+      "error": "البريد الإلكتروني أو كلمة المرور خاطئة",
+      "back_to_site": "العودة للموقع"
+    },
+    "dashboard": {
+      "title": "لوحة التحكم",
+      "welcome": "أهلاً بعودتك",
+      "logout": "تسجيل الخروج",
+      "view_site": "عرض الموقع",
+      "stats": {
+        "total_projects": "إجمالي المشاريع",
+        "featured_projects": "المميزة",
+        "unread_messages": "رسائل غير مقروءة",
+        "total_messages": "إجمالي الرسائل"
+      },
+      "tabs": {
+        "projects": "المشاريع",
+        "messages": "الرسائل"
+      },
+      "projects": {
+        "title": "إدارة المشاريع",
+        "add_new": "إضافة مشروع جديد",
+        "edit": "تعديل",
+        "delete": "حذف",
+        "featured": "مميز",
+        "no_projects": "لا توجد مشاريع بعد. أضف الأول!",
+        "confirm_delete": "هل أنت متأكد من حذف هذا المشروع؟"
+      },
+      "messages": {
+        "title": "صندوق الرسائل",
+        "no_messages": "لا توجد رسائل بعد",
+        "read": "مقروءة",
+        "unread": "غير مقروءة",
+        "mark_read": "تحديد كمقروءة",
+        "delete": "حذف",
+        "confirm_delete": "هل أنت متأكد من حذف هذه الرسالة؟",
+        "sent_by": "أُرسلت من"
+      },
+      "form": {
+        "add_title": "إضافة مشروع جديد",
+        "edit_title": "تعديل المشروع",
+        "title_en": "العنوان (بالإنجليزية)",
+        "title_ar": "العنوان (بالعربية)",
+        "description_en": "الوصف (بالإنجليزية)",
+        "description_ar": "الوصف (بالعربية)",
+        "long_description_en": "الوصف الطويل (بالإنجليزية)",
+        "long_description_ar": "الوصف الطويل (بالعربية)",
+        "image": "رابط الصورة",
+        "tech_stack": "التقنيات (مفصولة بفاصلة)",
+        "category": "التصنيف",
+        "github_url": "رابط GitHub",
+        "live_url": "رابط المعاينة",
+        "featured": "مشروع مميز",
+        "save": "حفظ",
+        "saving": "جاري الحفظ...",
+        "cancel": "إلغاء",
+        "categories": {
+          "frontend": "الواجهة الأمامية",
+          "backend": "الواجهة الخلفية",
+          "fullstack": "فل ستاك",
+          "web": "تطبيق ويب"
+        }
+      }
+    }
+  }
+}

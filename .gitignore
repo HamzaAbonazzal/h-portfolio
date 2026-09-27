@@ -1,0 +1,133 @@
+# ═══════════════════════════════════════════════════════════
+# Git Ignore — Full Stack Portfolio
+# Next.js (Frontend) + Node.js/Express (Backend) + MongoDB
+# ═══════════════════════════════════════════════════════════
+
+# ─────────────────────────────────────────────
+# 🔐 Environment Variables (سرية - لا ترفع أبداً)
+# ─────────────────────────────────────────────
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+.env*.local
+
+# ⚠️ استثناء: نريد رفع ملف القالب فقط
+!.env.example
+
+# ─────────────────────────────────────────────
+# 📦 Dependencies (ضخمة - يمكن استعادتها بـ npm install)
+# ─────────────────────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+.pnp.cjs
+
+# ─────────────────────────────────────────────
+# ⚡ Next.js
+# ─────────────────────────────────────────────
+.next/
+out/
+build/
+dist/
+swc/
+
+# Next.js cache
+.next/cache/
+.vercel
+
+# ─────────────────────────────────────────────
+# 📝 Logs
+# ─────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ─────────────────────────────────────────────
+# 🧪 Testing
+# ─────────────────────────────────────────────
+coverage/
+*.lcov
+.nyc_output/
+
+# ─────────────────────────────────────────────
+# 🎨 IDE / Editor
+# ─────────────────────────────────────────────
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# ─────────────────────────────────────────────
+# 💻 Operating System
+# ─────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ─────────────────────────────────────────────
+# 🗂️ Uploads / Temp Files
+# ─────────────────────────────────────────────
+uploads/
+tmp/
+temp/
+*.tmp
+*.bak
+
+# ─────────────────────────────────────────────
+# 📊 TypeScript
+# ─────────────────────────────────────────────
+*.tsbuildinfo
+next-env.d.ts
+
+# ─────────────────────────────────────────────
+# 📦 Package Managers
+# ─────────────────────────────────────────────
+.pnpm-store/
+.npm/
+.yarn/
+yarn-error.log
+
+# ─────────────────────────────────────────────
+# 🐳 Docker (إن استخدمته لاحقاً)
+# ─────────────────────────────────────────────
+docker-compose.override.yml
+.docker/
+
+# ─────────────────────────────────────────────
+# 📝 Misc
+# ─────────────────────────────────────────────
+*.pid
+*.seed
+*.pid.lock
+.eslintcache
+.stylelintcache
+
+# ─────────────────────────────────────────────
+# 🔒 Sensitive Data
+# ─────────────────────────────────────────────
+*.pem
+*.key
+*.crt
+*.p12
+secrets/
