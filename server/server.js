@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const connectDB = require("./config/db");
+const { runSeed } = require("./seedRunner");
 
 // Routes
 const projectRoutes = require("./routes/projectRoutes");
@@ -12,46 +13,94 @@ const authRoutes = require("./routes/authRoutes");
 // Middleware
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
-// ✅ إعدادات CORS (متوافقة مع Express 5 وتعتمد على متغيرات البيئة)
+// ✅ إعدادات CORS
 const corsOptions = {
   origin: [
-    "https://h-portfolio-000.vercel.app", // رابط الإنتاج على Vercel
-    "http://localhost:3000", // للتطوير المحلي
+    "https://h-portfolio-000.vercel.app",
+    "https://h-portfolio-9cda.vercel.app",
+    "http://localhost:3000",
   ],
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"], // ✅ الطرق المسموح بها
-  allowedHeaders: ["Content-Type", "Authorization"], // ✅ الرؤوس المسموح بها
-  optionsSuccessStatus: 200, // ✅ مهم لبعض المتصفحات القديمة
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  optionsSuccessStatus: 200,
 };
 
 dotenv.config();
-connectDB();
 
-const app = express();
+// ═══════════════════════════════════════════════════════════
+// 🚀 تشغيل السيرفر مع بذر تلقائي
+// ═══════════════════════════════════════════════════════════
+const startServer = async () => {
+  try {
+    // 1. الاتصال بقاعدة البيانات
+    await connectDB();
+    console.log("✅ MongoDB Connected");
 
-// ✅ استخدام إعدادات CORS قبل أي مسار آخر
-// هذا يتعامل تلقائياً مع طلبات OPTIONS (Preflight)
-app.use(cors(corsOptions));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+    // 2. ✅ البذر التلقائي (فقط إذا كانت القاعدة فارغة)
+    console.log("🔍 Checking if seeding is needed...");
+    try {
+      const seedResult = await runSeed();
 
-// المسار الرئيسي
-app.get("/", (req, res) => {
-  res.json({ message: "Portfolio API is running..." });
-});
+      if (seedResult.success) {
+        if (seedResult.results.admin.created) {
+          console.log("✅ Admin user created");
+        } else {
+          console.log("ℹ️  Admin already exists");
+        }
 
-// مسارات الـ API
-app.use("/api/projects", projectRoutes);
-app.use("/api/skills", skillRoutes);
-app.use("/api/messages", messageRoutes);
-app.use("/api/auth", authRoutes);
+        if (seedResult.results.projects.count > 0) {
+          console.log(`✅ ${seedResult.results.projects.count} projects added`);
+        } else {
+          console.log("ℹ️  Projects already exist");
+        }
+      } else {
+        console.warn("⚠️  Seeding skipped:", seedResult.error);
+      }
+    } catch (seedError) {
+      console.warn("⚠️  Seeding error (non-blocking):", seedError.message);
+    }
 
-// معالجة الأخطاء (يجب أن تكون في النهاية)
-app.use(notFound);
-app.use(errorHandler);
+    // 3. إعداد Express
+    const app = express();
 
-const PORT = process.env.PORT || 5000;
+    app.use(cors(corsOptions));
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
+    // المسار الرئيسي
+    app.get("/", (req, res) => {
+      res.json({ message: "Portfolio API is running..." });
+    });
+
+    // ✅ مسار يدوي للبذر (اختياري - للاستخدام لاحقاً)
+    app.post("/api/seed", async (req, res) => {
+      const secret = req.headers["x-seed-secret"];
+      if (!secret || secret !== process.env.SEED_SECRET) {
+        return res.status(401).json({ message: "Unauthorized" });
+      }
+      const result = await runSeed();
+      res.json(result);
+    });
+
+    // مسارات الـ API
+    app.use("/api/projects", projectRoutes);
+    app.use("/api/skills", skillRoutes);
+    app.use("/api/messages", messageRoutes);
+    app.use("/api/auth", authRoutes);
+
+    // معالجة الأخطاء
+    app.use(notFound);
+    app.use(errorHandler);
+
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("❌ Failed to start server:", error.message);
+    process.exit(1);
+  }
+};
+
+startServer();
