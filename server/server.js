@@ -12,10 +12,12 @@ const authRoutes = require("./routes/authRoutes");
 // Middleware
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
-const cors = require("cors");
-
+// ✅ إعدادات CORS (متوافقة مع Express 5)
 const corsOptions = {
-  origin: "https://h-portfolio-000.vercel.app", // رابط الواجهة الأمامية
+  origin: [
+    "https://h-portfolio-000.vercel.app", // الإنتاج
+    "http://localhost:3000", // التطوير المحلي
+  ],
   credentials: true,
   optionsSuccessStatus: 200,
 };
@@ -25,12 +27,10 @@ connectDB();
 
 const app = express();
 
+// ✅ Middlewares العامة
+// ملاحظة: app.use(cors()) يتعامل تلقائياً مع طلبات OPTIONS (Preflight)
+// لا حاجة لسطر app.options("*", ...) — فهو غير متوافق مع Express 5
 app.use(cors(corsOptions));
-
-app.options("*", cors(corsOptions));
-
-// Middlewares العامة
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
