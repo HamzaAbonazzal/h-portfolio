@@ -124,14 +124,14 @@ export function Projects() {
         {/* حالة الخطأ */}
         {error && !loading && (
           <div className="flex flex-col items-center justify-center py-20 gap-4">
-            <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center">
+            {/* <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center">
               <FolderOpen className="w-8 h-8 text-red-500" />
-            </div>
-            <p className="text-gray-500 dark:text-gray-400 text-center max-w-md">
+            </div> */}
+            {/* <p className="text-gray-500 dark:text-gray-400 text-center max-w-md">
               {t("error")}
-            </p>
+            </p> */}
             <p className="text-xs text-gray-400">
-              تأكد من تشغيل سيرفر الباك إند على المنفذ 5000
+              لا يوجد مشاريع مضافة بعد
             </p>
           </div>
         )}
