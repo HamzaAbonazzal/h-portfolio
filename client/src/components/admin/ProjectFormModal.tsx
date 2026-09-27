@@ -3,8 +3,16 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Loader2, Save, Upload, ImageIcon, Link as LinkIcon } from "lucide-react";
+import {
+  X,
+  Loader2,
+  Save,
+  Upload,
+  ImageIcon,
+  Link as LinkIcon,
+} from "lucide-react";
 import { adminProjectService, type Project } from "@/lib/api";
+import { ImageUploader } from "./ImageUploader";
 
 interface ProjectFormModalProps {
   open: boolean;
@@ -34,7 +42,10 @@ declare global {
     cloudinary?: {
       createUploadWidget: (
         options: Record<string, unknown>,
-        callback: (error: unknown, result: { event: string; info: { secure_url: string } }) => void
+        callback: (
+          error: unknown,
+          result: { event: string; info: { secure_url: string } },
+        ) => void,
       ) => { open: () => void };
     };
   }
@@ -86,7 +97,7 @@ export function ProjectFormModal({
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
@@ -99,7 +110,9 @@ export function ProjectFormModal({
   // ✅ رفع الصورة عبر Cloudinary Widget
   const handleImageUpload = () => {
     if (!window.cloudinary) {
-      alert("Cloudinary widget is still loading. Please try again in a moment.");
+      alert(
+        "Cloudinary widget is still loading. Please try again in a moment.",
+      );
       return;
     }
 
@@ -108,7 +121,7 @@ export function ProjectFormModal({
 
     if (!cloudName || !uploadPreset) {
       alert(
-        "Cloudinary is not configured. Please set NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME and NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET in .env.local"
+        "Cloudinary is not configured. Please set NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME and NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET in .env.local",
       );
       return;
     }
@@ -147,11 +160,11 @@ export function ProjectFormModal({
           // ✅ ضع الرابط المُحسّن مباشرة
           const optimizedUrl = result.info.secure_url.replace(
             "/upload/",
-            "/upload/w_1200,h_675,c_fill,q_auto,f_auto/"
+            "/upload/w_1200,h_675,c_fill,q_auto,f_auto/",
           );
           setForm((prev) => ({ ...prev, image: optimizedUrl }));
         }
-      }
+      },
     );
 
     widget.open();
@@ -324,82 +337,18 @@ export function ProjectFormModal({
               </div>
 
               {/* ═══════════════════════════════════════ */}
-              {/* 🖼️ الصورة - مع زر رفع Cloudinary */}
+              {/* 🖼️ الصورة - مع رفع تلقائي */}
               {/* ═══════════════════════════════════════ */}
-              <div className="p-4 rounded-2xl border-2 border-dashed border-gold-500/20 bg-gold-500/[0.02]">
+              <div>
                 <label className="block text-xs font-bold text-gold-500 uppercase tracking-wider mb-3">
                   {t("image")}
                 </label>
-
-                <div className="grid md:grid-cols-[1fr,auto] gap-3 items-start">
-                  {/* حقل الرابط */}
-                  <div className="space-y-2">
-                    <div className="relative">
-                      <LinkIcon className="absolute top-1/2 -translate-y-1/2 start-4 w-4 h-4 text-gold-500/60" />
-                      <input
-                        type="url"
-                        name="image"
-                        value={form.image}
-                        onChange={handleChange}
-                        required
-                        placeholder="https://res.cloudinary.com/..."
-                        className={`${inputClass} ps-11`}
-                      />
-                    </div>
-
-                    {/* زر الرفع */}
-                    <button
-                      type="button"
-                      onClick={handleImageUpload}
-                      disabled={uploading}
-                      className="w-full inline-flex items-center justify-center gap-2
-                                 px-5 py-2.5 rounded-xl
-                                 bg-gold-500/10 text-gold-500 text-sm font-semibold
-                                 border border-gold-500/30
-                                 hover:bg-gold-500/20 hover:border-gold-500
-                                 transition-all duration-300
-                                 disabled:opacity-60 disabled:cursor-not-allowed"
-                    >
-                      {uploading ? (
-                        <>
-                          <Loader2 className="w-4 h-4 animate-spin" />
-                          Uploading...
-                        </>
-                      ) : (
-                        <>
-                          <Upload className="w-4 h-4" />
-                          Upload Image to Cloudinary
-                        </>
-                      )}
-                    </button>
-                  </div>
-
-                  {/* معاينة الصورة */}
-                  <div className="w-full md:w-48 h-32 md:h-28 rounded-xl border border-gold-500/20
-                                  bg-white/50 dark:bg-dark-700/50 overflow-hidden
-                                  flex items-center justify-center">
-                    {form.image ? (
-                      <img
-                        src={form.image}
-                        alt="Preview"
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).style.display = "none";
-                        }}
-                      />
-                    ) : (
-                      <div className="flex flex-col items-center gap-1.5 text-gray-400">
-                        <ImageIcon className="w-6 h-6" />
-                        <span className="text-[10px]">Preview</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <p className="mt-3 text-[11px] text-gray-500 dark:text-gray-500 flex items-center gap-1.5">
-                  <span className="w-1 h-1 rounded-full bg-gold-500/60" />
-                  استخدم زر الرفع أو ألصق رابط صورة مباشر (JPG, PNG, WebP)
-                </p>
+                <ImageUploader
+                  value={form.image}
+                  onChange={(url) =>
+                    setForm((prev) => ({ ...prev, image: url }))
+                  }
+                />
               </div>
 
               {/* التقنيات */}

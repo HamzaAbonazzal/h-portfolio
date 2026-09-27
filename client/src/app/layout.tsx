@@ -51,12 +51,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
-
-        {/* ✅ Cloudinary Upload Widget Script */}
-        <Script
-          src="https://upload-widget.cloudinary.com/global/all.js"
-          strategy="lazyOnload"
-        />
       </head>
       <body>
         <ThemeProvider>{children}</ThemeProvider>
