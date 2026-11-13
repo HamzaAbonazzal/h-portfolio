@@ -19,6 +19,7 @@ const corsOptions = {
     "https://h-portfolio-000.vercel.app",
     "https://h-portfolio-9cda.vercel.app",
     "http://localhost:3000",
+    "http://localhost:4200",
   ],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
